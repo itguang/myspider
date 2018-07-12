@@ -21,11 +21,6 @@ import java.net.URLEncoder;
 @Slf4j
 public class DoajArticleTask {
 
-    /**
-     * source={"query":{"match_all":{}},"sort":[{"_score":{"order":"asc"}}],"from":10,"size":10}
-     */
-    String baseUrl = "https://doaj.org/search?source={\"query\":{\"match_all\":{}},\"sort\":[{\"_score\":{\"order\":\"asc\"}}],\"from\":#,\"size\":10}";
-
     @Autowired
     DoajArticleProcessor processor;
     @Autowired
@@ -34,11 +29,13 @@ public class DoajArticleTask {
     RedisScheduler redisScheduler;
 
 
-
 //    @Async
     public void task(){
 
+
         String articleUrl = DoajUtil.getArticleUrl("0");
+
+        log.info("url={}",articleUrl);
 
         //第一步: 添加 processor 和 pipline, Scheduler
         Spider spider = Spider.create(processor).addPipeline(pipeline);//.setScheduler(redisScheduler);

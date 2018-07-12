@@ -9,29 +9,45 @@ import java.net.URLEncoder;
  **/
 public class DoajUtil {
 
-  public static  String baseUrl = "https://doaj.org/search?source={\"query\":{\"match_all\":{}},\"sort\":[{\"_score\":{\"order\":\"asc\"}}],\"from\":#,\"size\":10}";
+    /**
+     * https://doaj.org/query/journal,article/_search?&callback=jQuery191028819401622742236_1531308284755&source={
+     * "query": {
+     * "match_all": {}
+     * },
+     * "from": 0,
+     * "size": 10
+     * }
+     */
 
+    public static String baseUrl = "https://doaj.org/query/journal,article/_search";
+
+    public static String params = "&callback=jQuery191028819401622742236_1531308284755&source={ \"query\": { \"match_all\": {} }, \"from\": #, \"size\": 10 }";
 
     /**
-     * 起始页数
-     * @param start
+     *
+     *
+     * @param start 起始位置from
      * @return
      */
-    public static String getArticleUrl(String start){
+    public static String getArticleUrl(String start) {
 
-        String url = baseUrl.replace("#", start);
-
-        String encodeUrl = "";
+        String params2 = params.replace("#", start);
+        String encode = "";
         try {
-            encodeUrl = URLEncoder.encode(url, "utf-8");
+            encode = URLEncoder.encode(params2, "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
+        String url = baseUrl + encode;
 
-        return encodeUrl;
+
+        return url;
 
     }
 
 
 }
+
+
+
