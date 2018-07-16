@@ -8,6 +8,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.downloader.HttpClientDownloader;
+import us.codecraft.webmagic.proxy.Proxy;
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
 import java.util.HashMap;
@@ -43,7 +46,7 @@ public class JournalTask {
         HashMap<String, String> map = new HashMap<>(10);
 
         //机构id
-        map.put("unitid ", "1");
+        map.put("unitid ", "33736");
 
         //个人用户ID
         map.put("userid", "1");
@@ -90,6 +93,11 @@ public class JournalTask {
         log.info("requestUrl={}",requestUrl);
 
         Spider spider = Spider.create(processor).addPipeline(pipeline);//.setScheduler(redisScheduler);
+
+        HttpClientDownloader downloader = new HttpClientDownloader();
+        downloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("120.55.88.199", 8085)));
+
+        spider.setDownloader(downloader);
 
         request.setUrl(requestUrl);
 

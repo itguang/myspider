@@ -9,7 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  **/
 public interface DoajArticleContentRepository extends JpaRepository<DoajArticleContentEntity,String> {
 
-
-
-
 }

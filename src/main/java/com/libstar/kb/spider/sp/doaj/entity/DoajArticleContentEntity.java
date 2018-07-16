@@ -5,13 +5,15 @@ import lombok.Data;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
 /**
  * @author itguang
- * @create 2018-07-16 15:00
+ * @create 2018-07-16 16:35
  **/
 @Entity
 @Data
@@ -34,7 +36,9 @@ public class DoajArticleContentEntity {
     private String startPage;
     private String articleAbstract;
     private String doi;
-    private String fulltext;
+    private String articleFulltext;
+
+
 
 
 }

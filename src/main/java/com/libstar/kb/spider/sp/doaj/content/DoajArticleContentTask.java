@@ -1,7 +1,5 @@
 package com.libstar.kb.spider.sp.doaj.content;
 
-import com.libstar.kb.spider.sp.doaj.article.DoajArticlePipeline;
-import com.libstar.kb.spider.sp.doaj.article.DoajArticleProcessor;
 import com.libstar.kb.spider.sp.doaj.util.DoajUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

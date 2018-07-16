@@ -49,7 +49,7 @@ public class DoajArticleContentPipeline implements Pipeline {
             articleContentEntity.setEndPage(entity.getSource().getBibjson().getEndPage());
             articleContentEntity.setCreatedDate(entity.getSource().getCreatedDate());
             articleContentEntity.setLastUpdated(entity.getSource().getLastUpdated());
-            articleContentEntity.setFulltext(entity.getSource().getBibjson().getLink().get(0).getUrl());
+            articleContentEntity.setArticleFulltext(entity.getSource().getBibjson().getLink().get(0).getUrl());
             articleContentEntity.setPublisher(entity.getSource().getBibjson().getJournal().getPublisher());
 
             List<IdentifierBean> identifier = entity.getSource().getBibjson().getIdentifier();
