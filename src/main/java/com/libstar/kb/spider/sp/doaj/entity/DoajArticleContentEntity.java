@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * @author itguang
- * @create 2018-07-11 8:55
+ * @create 2018-07-16 15:00
  **/
 @Entity
 @Data
@@ -21,17 +21,20 @@ public class DoajArticleContentEntity {
     @Id
     private String id;
     private String articleTitle;
-    private String doi;
     private String journalTitle;
     private String issn;
     private String publisher;
-    private String society;
+    private String lastUpdated;
+    private String createdDate;
     private String lccSubjectCategory;
     private String countryOfPublisher;
     private String languageOfFulltext;
-    private String formatsAvailable;
     private String authors;
+    private String endPage;
+    private String startPage;
     private String articleAbstract;
+    private String doi;
+    private String fulltext;
 
 
 }

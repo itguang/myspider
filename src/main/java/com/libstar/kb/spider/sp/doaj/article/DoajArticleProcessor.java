@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.selector.Html;
-import us.codecraft.webmagic.selector.Json;
 
 /**
  * @author itguang
@@ -17,13 +15,8 @@ import us.codecraft.webmagic.selector.Json;
 @Slf4j
 public class DoajArticleProcessor implements PageProcessor {
 
-
     @Override
     public void process(Page page) {
-
-        Json json = page.getJson();
-
-        log.info("json=={}",json);
 
 
     }

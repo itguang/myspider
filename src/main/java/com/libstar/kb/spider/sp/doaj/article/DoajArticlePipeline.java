@@ -13,6 +13,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 @Component
 @Slf4j
 public class DoajArticlePipeline implements Pipeline {
+
     @Override
     public void process(ResultItems resultItems, Task task) {
 

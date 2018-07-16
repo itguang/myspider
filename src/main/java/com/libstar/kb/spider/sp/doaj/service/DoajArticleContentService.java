@@ -13,7 +13,6 @@ import java.util.List;
  * @create 2018-07-11 10:01
  **/
 @Service
-@Transactional
 public class DoajArticleContentService {
 
     @Autowired
