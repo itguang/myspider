@@ -28,31 +28,18 @@ public class DoajArticleTask {
     @Autowired
     RedisScheduler redisScheduler;
 
-
 //    @Async
     public void task(){
-
 
         String articleUrl = DoajUtil.getArticleUrl("0");
 
         log.info("url={}",articleUrl);
 
-        //第一步: 添加 processor 和 pipline, Scheduler
         Spider spider = Spider.create(processor).addPipeline(pipeline);//.setScheduler(redisScheduler);
 
-        //第二步: 添加初始化url
         spider.addUrl(articleUrl);
 
         spider.thread(1).run();
         log.info("-->> end <<抓取 DoajArticleEntity 的任务完毕>>");
-
-
-
-
-
-
-
     }
-
-
 }
