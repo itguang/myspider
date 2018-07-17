@@ -1,6 +1,10 @@
 package com.libstar.kb.spider.sp.doaj.util;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
@@ -10,18 +14,13 @@ import java.net.URLEncoder;
 public class DoajUtil {
 
     /**
-     * https://doaj.org/query/journal,article/_search?&callback=jQuery191028819401622742236_1531308284755&source={
-     * "query": {
-     * "match_all": {}
-     * },
-     * "from": 0,
-     * "size": 10
+     *https://doaj.org/query/journal,article/_search?source={%22query%22:{%22match_all%22:{}},%22from%22:20,%22size%22:10}
+     * https://doaj.org/query/journal,article/_search?source={"query":{"match_all":{}},"from":20,"size":10}
      * }
      */
+    public static String baseUrl = "https://doaj.org/query/journal,article/_search?source=";
 
-    public static String baseUrl = "https://doaj.org/query/journal,article/_search";
-
-    public static String params = "&callback=jQuery191028819401622742236_1531308284755&source={ \"query\": { \"match_all\": {} }, \"from\": #, \"size\": 10 }";
+    public static String params = "{\"query\":{\"match_all\":{}},\"from\":#,\"size\":10}";
 
     /**
      *
@@ -44,6 +43,31 @@ public class DoajUtil {
 
         return url;
 
+    }
+
+    /**
+     *
+     * @param url
+     * @return
+     */
+    public static int getFrom(String url){
+
+        String decode="";
+        try {
+             decode = URLDecoder.decode(url, "utf-8");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        int i = decode.lastIndexOf("=");
+        String source = decode.substring(i + 1, decode.length());
+
+        JsonObject parse = new JsonParser().parse(source).getAsJsonObject();
+
+        int from = parse.get("from").getAsInt();
+
+        return from;
     }
 
 

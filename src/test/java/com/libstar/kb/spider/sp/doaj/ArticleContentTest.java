@@ -1,17 +1,11 @@
 package com.libstar.kb.spider.sp.doaj;
 
 import com.libstar.kb.spider.sp.doaj.content.DoajArticleContentTask;
-import com.libstar.kb.spider.sp.doaj.dao.DoajArticleContentRepository;
-import com.libstar.kb.spider.sp.doaj.dao.DoajArticleRepository;
-import com.libstar.kb.spider.sp.doaj.entity.DoajArticleContentEntity;
-import com.libstar.kb.spider.sp.doaj.entity.DoajArticleEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 /**
  * @author itguang
@@ -20,14 +14,6 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ArticleContentTest {
-
-
-    @Autowired
-    DoajArticleContentRepository repository;
-
-    @Autowired
-    DoajArticleRepository repository2;
-
 
     @Autowired
     DoajArticleContentTask task;
@@ -40,19 +26,5 @@ public class ArticleContentTest {
 
     }
 
-
-    @Test
-    public void test2() {
-
-        DoajArticleContentEntity entity = new DoajArticleContentEntity();
-        entity.setId("test");
-
-        Optional<DoajArticleContentEntity> test = repository.findById("test1");//正常
-
-         repository.save(entity);//报错
-
-
-
-    }
 
 }

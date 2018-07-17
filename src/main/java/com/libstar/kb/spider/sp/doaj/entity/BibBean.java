@@ -47,105 +47,11 @@ public class BibBean {
     @SerializedName("subject")
     private List<SubjectBean> subject;
     @SerializedName("link")
-    private List<LicenseBean> link;
+    private List<LinkBean> link;
     @SerializedName("keywords")
     private List<String> keywords;
     @SerializedName("identifier")
     private List<IdentifierBean> identifier;
 
-    public String getStartPage() {
-        return startPage;
-    }
 
-    public void setStartPage(String startPage) {
-        this.startPage = startPage;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAbstractX() {
-        return abstractX;
-    }
-
-    public void setAbstractX(String abstractX) {
-        this.abstractX = abstractX;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public JournalBean getJournal() {
-        return journal;
-    }
-
-    public void setJournal(JournalBean journal) {
-        this.journal = journal;
-    }
-
-    public String getEndPage() {
-        return endPage;
-    }
-
-    public void setEndPage(String endPage) {
-        this.endPage = endPage;
-    }
-
-    public List<AuthorBean> getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(List<AuthorBean> author) {
-        this.author = author;
-    }
-
-    public List<SubjectBean> getSubject() {
-        return subject;
-    }
-
-    public void setSubject(List<SubjectBean> subject) {
-        this.subject = subject;
-    }
-
-    public List<LicenseBean> getLink() {
-        return link;
-    }
-
-    public void setLink(List<LicenseBean> link) {
-        this.link = link;
-    }
-
-    public List<String> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
-    public List<IdentifierBean> getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(List<IdentifierBean> identifier) {
-        this.identifier = identifier;
-    }
 }

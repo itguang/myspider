@@ -32,16 +32,14 @@ public class DoajArticleContentTask {
 
         String articleUrl = DoajUtil.getArticleUrl("0");
 
-        log.info("url={}",articleUrl);
+        log.info("初始url={}",articleUrl);
 
-        Spider spider = Spider.create(processor).addPipeline(pipeline);//.setScheduler(redisScheduler);
+        Spider spider = Spider.create(processor).addPipeline(pipeline).setScheduler(redisScheduler);
 
         spider.addUrl(articleUrl);
 
-        spider.thread(1).run();
-        log.info("-->> end <<抓取 DoajArticleEntity 的任务完毕>>");
-
-
+        spider.thread(3).run();
+        log.info("-->> end <<抓取 DoajArticleContentEntity 的任务完毕>>");
 
 
     }
