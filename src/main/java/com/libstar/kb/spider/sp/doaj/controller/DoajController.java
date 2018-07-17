@@ -1,6 +1,5 @@
 package com.libstar.kb.spider.sp.doaj.controller;
 
-import com.libstar.kb.spider.sp.doaj.article.DoajArticleTask;
 import com.libstar.kb.spider.sp.doaj.content.DoajArticleContentTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

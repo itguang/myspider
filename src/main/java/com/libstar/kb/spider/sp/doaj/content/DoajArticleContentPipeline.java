@@ -66,7 +66,6 @@ public class DoajArticleContentPipeline implements Pipeline {
                 articleContentEntity.setLccSubjectCategory(classificationPaths.toString());
             }
 
-
             articleContentEntity.setJournalTitle(entity.getSource().getBibjson().getJournal().getTitle());
             articleContentEntity.setStartPage(entity.getSource().getBibjson().getStartPage());
             articleContentEntity.setEndPage(entity.getSource().getBibjson().getEndPage());
