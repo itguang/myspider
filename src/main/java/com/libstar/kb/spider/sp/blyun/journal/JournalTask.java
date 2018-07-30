@@ -4,7 +4,6 @@ import com.libstar.kb.spider.sp.blyun.util.MD5Utils;
 import com.libstar.kb.spider.sp.blyun.util.UrlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
@@ -43,10 +42,10 @@ public class JournalTask {
 
         Request request = new Request();
 
-        HashMap<String, String> map = new HashMap<>(10);
+        HashMap<String, String> map = new HashMap<>();
 
         //机构id
-        map.put("unitid ", "33736");
+        map.put("unitid", "33736");
 
         //个人用户ID
         map.put("userid", "1");
@@ -55,60 +54,61 @@ public class JournalTask {
         map.put("usertype", "1");
 
         //字典顺序排序,MD5
-        String cookie = UrlUtils.sort(map);
-        String msign = MD5Utils.md5("key="+key + cookie);
-
+        String cookie = "key=" + key + UrlUtils.sort(map);
+        String msign = MD5Utils.md5(cookie);
 
         //设置cookie
-        request.addCookie("msign",msign);
-        log.info("msign={}",msign);
+        request.addCookie("msign", msign);
+        log.info("msign={}", msign);
 
         //设置header
-        request.addHeader("x-real-ip","49.74.43.232");
-        log.info("x-real-ip={}","49.74.43.232");
+        request.addHeader("x-real-ip", "106.15.229.61");
+        log.info("x-real-ip={}", "106.15.229.61");
 
-//         map.put("field","1");
-        map.put("page", "1");
+        //毫秒级系统时间
+        map.put("timestr", String.valueOf(System.currentTimeMillis()));
 
         //固定值
         map.put("go", "magsearch");
         map.put("json", "djson");
 
-        //检索词
-        map.put("sw", "教育");
+        //额外参数
+        map.put("gjflids", "2");
+        map.put("choren", "0");
+        map.put("field", "1");
 
-        //毫秒级系统时间
-        map.put("timestr", String.valueOf(System.currentTimeMillis()));
+        //检索词
+        String keyword = "哲学";
+        map.put("sw", keyword);
+        map.put("page", "1");
 
         //字典顺序排序
         String sort = UrlUtils.sort(map);
+        log.info("sort={}", sort);
         //MD5 加密
         String md5 = MD5Utils.md5(sort + key);
+        log.info("encStr={}", sort + key);
 
         //用户验证加密串
         map.put("enc", md5);
 
+        String encode = UrlUtils.encode(keyword);
+        map.put("sw", encode);
+
         //拼接url
         String requestUrl = UrlUtils.appendParams(BASEURL, map);
-        log.info("requestUrl={}",requestUrl);
+        log.info("requestUrl={}", requestUrl);
 
         Spider spider = Spider.create(processor).addPipeline(pipeline);//.setScheduler(redisScheduler);
 
         HttpClientDownloader downloader = new HttpClientDownloader();
-        downloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("120.55.88.199", 8085)));
-
+        downloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("106.15.229.61", 8011)));
         spider.setDownloader(downloader);
-
         request.setUrl(requestUrl);
-
-        //spider.addUrl(requestUrl);
-
         spider.addRequest(request);
-
 
         spider.thread(1).run();
         log.info("-->> end <<抓取 http://fjour.blyun.com/magguide 的任务完毕>>");
-
 
     }
 

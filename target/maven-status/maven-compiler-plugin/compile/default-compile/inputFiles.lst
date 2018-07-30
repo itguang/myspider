@@ -27,6 +27,7 @@ D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\doaj\entity\IdentifierBe
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\cspd\dao\PerioAuthorsBeanRepository.java
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\cspd\utils\StrUtils.java
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\cspd\utils\UrlUtils.java
+D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\blyun\controller\BlyunController.java
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\datadryad\content\DryadContentprocessor.java
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\doaj\entity\SourceBean.java
 D:\java\myspider\src\main\java\com\libstar\kb\spider\sp\cspd\service\YearTreeEntityService.java

@@ -18,7 +18,6 @@ public class DoajArticleProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
-
     }
 
     @Override

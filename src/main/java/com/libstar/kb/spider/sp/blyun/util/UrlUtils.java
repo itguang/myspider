@@ -1,7 +1,9 @@
 package com.libstar.kb.spider.sp.blyun.util;
 
-import com.libstar.kb.spider.sp.cspd.utils.StrUtils;
+import com.libstar.kb.spider.sp.cspd.utils.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -220,6 +222,21 @@ public class UrlUtils {
         }
 
         return strAllParam;
+    }
+
+
+
+    public static String  encode(String str){
+
+        String encode = "";
+        try {
+            encode = URLEncoder.encode(str, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        return encode;
     }
 
 }
