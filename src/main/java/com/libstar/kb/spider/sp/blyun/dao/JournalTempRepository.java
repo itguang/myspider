@@ -10,11 +10,13 @@ import org.springframework.data.repository.query.Param;
  * @author 李增光
  * @create 2018-07-31 17:29
  **/
-public interface JournalTempRepository extends JpaRepository<JournalTempEntity,String> {
-
+public interface JournalTempRepository extends JpaRepository<JournalTempEntity, String> {
 
     @Modifying
     @Query("update JournalTempEntity  obj set obj.flag=:flag where obj.categoryId=:categoryId")
     void updateFlag(@Param("flag") String flag, @Param("categoryId") String categoryId);
+
+    JournalTempEntity findDistinctFirstByFlag(String flag);
+
 
 }

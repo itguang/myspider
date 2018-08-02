@@ -61,13 +61,17 @@ public class UrlUtils {
             url = url.trim();
             int length = url.length();
             int index = url.indexOf("?");
-            if (index > -1) {//url说明有问号
-                if ((length - 1) == index) {//url最后一个符号为？，如：http://wwww.baidu.com?
+            //url说明有问号
+            if (index > -1) {
+                //url最后一个符号为？，如：http://wwww.baidu.com?
+                if ((length - 1) == index) {
                     url += sb.toString();
-                } else {//情况为：http://wwww.baidu.com?aa=11
+                } else {
+                    //情况为：http://wwww.baidu.com?aa=11
                     url += "&" + sb.toString();
                 }
-            } else {//url后面没有问号，如：http://wwww.baidu.com
+            } else {
+                //url后面没有问号，如：http://wwww.baidu.com
                 url += "?" + sb.toString();
             }
             return url;
@@ -167,8 +171,7 @@ public class UrlUtils {
         String[] arrSplit=null;
 
         String strUrlParam=getParamsFormUrl(URL);
-        if(strUrlParam==null)
-        {
+        if(strUrlParam==null) {
             return mapRequest;
         }
         //每个键值为一组 www.2cto.com

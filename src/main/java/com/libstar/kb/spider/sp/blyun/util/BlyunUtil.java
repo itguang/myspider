@@ -22,7 +22,7 @@ public class BlyunUtil {
      * choren 中外文
      * 两个参数配合使用
      */
-   static String gjflids = "1";
+    static String gjflids = "1";
 
     /**
      * 个人用户类型  正式用户：1    临时用户：0
@@ -39,29 +39,28 @@ public class BlyunUtil {
     /**
      * 页码
      */
-    static String page = "1";
+    static String pages = "1";
 
     //---------------------------------------------------
     /**
      * choren 中外文
      */
-    static String choren = "1";
+//    static String choren = "1";
     /**
      * field不传的话，默认检索全部，field=1是检索标题
      */
-    static String field = "";
+//    static String field = "";
 
 
     /**
-     *
      * @param categoryId 分类id
-     * @param p 页码,默认第一页
+     * @param p          页码,默认第一页
      * @return
      */
     public static Request getUrl(String categoryId, String p) {
 
         gjflids = categoryId;
-        page = p;
+        pages = p;
 
         Request request = new Request();
         HashMap<String, String> map = new HashMap<>();
@@ -79,10 +78,11 @@ public class BlyunUtil {
         map.put("go", GO);
         map.put("json", JSON);
         map.put("gjflids", gjflids);
+        map.put("pages", pages);
+        map.put("sw", keyword);
 //        map.put("choren", choren);
 //        map.put("field", field);
-        map.put("sw", keyword);
-        map.put("page", page);
+
 
         map.put("enc", MD5Utils.md5(UrlUtils.sort(map) + KEY));
 

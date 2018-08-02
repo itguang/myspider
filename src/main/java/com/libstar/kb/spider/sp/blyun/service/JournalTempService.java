@@ -24,11 +24,18 @@ public class JournalTempService {
 
     public  List<String> journalTempList(){
         List<JournalTempEntity> list = journalTempRepository.findAll();
-        List<String> categoryIds = list.stream().filter(entity -> entity.getFlag() == "0").map(JournalTempEntity::getCategoryId).distinct().collect(Collectors.toList());
-        log.info("size={}",categoryIds.size());
-
+        List<String> categoryIds = list.stream().filter(entity -> "0".equals(entity.getFlag())).map(JournalTempEntity::getCategoryId).distinct().collect(Collectors.toList());
         return categoryIds;
+    }
 
+    /**
+     * 根据flag返回一个
+     * @param flag
+     * @return
+     */
+    public JournalTempEntity findOneByFlag(String flag){
+        JournalTempEntity entity = journalTempRepository.findDistinctFirstByFlag(flag);
+        return entity;
     }
 
     /**
@@ -39,10 +46,5 @@ public class JournalTempService {
     public void updateFlag(String flag,String categoryId){
         journalTempRepository.updateFlag(flag,categoryId);
     }
-
-
-
-
-
 
 }

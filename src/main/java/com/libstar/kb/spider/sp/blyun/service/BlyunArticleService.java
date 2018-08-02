@@ -20,8 +20,9 @@ public class BlyunArticleService {
     BlyunArticleEntityRepository blyunArticleEntityRepository;
 
 
-    public void saveAll(List<BlyunArticleEntity> list){
-        blyunArticleEntityRepository.saveAll(list);
+    public int saveAll(List<BlyunArticleEntity> list){
+        List<BlyunArticleEntity> saves = blyunArticleEntityRepository.saveAll(list);
+        return saves.size();
     }
 
 

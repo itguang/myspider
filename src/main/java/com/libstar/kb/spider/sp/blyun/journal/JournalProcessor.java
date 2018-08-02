@@ -1,5 +1,6 @@
 package com.libstar.kb.spider.sp.blyun.journal;
 
+import com.libstar.kb.spider.sp.blyun.entity.JournalTempEntity;
 import com.libstar.kb.spider.sp.blyun.service.JournalTempService;
 import com.libstar.kb.spider.sp.blyun.util.BlyunUtil;
 import com.libstar.kb.spider.sp.blyun.util.UrlUtils;
@@ -15,9 +16,10 @@ import us.codecraft.webmagic.selector.Json;
 import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.List;
+import java.util.zip.CheckedOutputStream;
 
 /**
- * @author itguang
+ * @author 李增光
  * @create 2018-07-13 16:23
  **/
 @Component
@@ -26,43 +28,41 @@ public class JournalProcessor implements PageProcessor {
 
     @Autowired
     JournalTempService journalTempService;
-
     private static Integer size = 15;
 
-    volatile boolean done = false;
-
+    volatile int count = 2;
+    volatile int num;
 
     @Override
     public void process(Page page) {
 
-        if (!done) {
-            List<String> ids = journalTempService.journalTempList();
-            for (String categoryId : ids) {
-                Request request = BlyunUtil.getUrl(categoryId, "1");
-                page.addTargetRequest(request);
-                journalTempService.updateFlag("1", categoryId);
-            }
-            done = true;
-        }
-
-
-        //判断url的参数page是否为1
-        String p = UrlUtils.getParams(page.getUrl().get()).get("page");
-
+        //判断url的参数pages是否为1
+         String p = UrlUtils.getParams(page.getUrl().get()).get("pages");
         if ("1".equals(p)) {
-
+            count = 2;
             String gjflids = UrlUtils.getParams(page.getUrl().get()).get("gjflids");
             Integer total = Integer.valueOf(page.getJson().jsonPath("$.hitcount").get());
-            int num = total % size == 0 ? total / size : total / size + 1;
+            num = total % size == 0 ? total / size : total / size + 1;
             for (int i = 2; i <= num; i++) {
                 Request request = BlyunUtil.getUrl(gjflids, String.valueOf(i));
                 page.addTargetRequest(request);
             }
         }
+        if (count <= num) {
+            count++;
+            List<String> list = page.getJson().jsonPath("$.results").all();
+            page.putField("results", list.toString());
+            return;
+        }
 
-        List<String> list = page.getJson().jsonPath("$.results").all();
-        page.putField("results", list.toString());
+        JournalTempEntity entity = journalTempService.findOneByFlag("0");
+        if (entity == null) {
 
+            return;
+        }
+        Request request = BlyunUtil.getUrl(entity.getCategoryId(), "1");
+        page.addTargetRequest(request);
+        journalTempService.updateFlag("1", entity.getCategoryId());
     }
 
     @Override

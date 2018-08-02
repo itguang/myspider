@@ -24,7 +24,7 @@ public class JournalTempEntity {
     private String dataShopName;
     private String dataType;
     private String dataName;
-    private  String flag;
+    private String flag;
 
     @Id
     @Column(name = "id")
