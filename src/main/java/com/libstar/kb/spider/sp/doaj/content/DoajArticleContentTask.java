@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import sun.text.resources.en.FormatData_en_IE;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
@@ -29,12 +30,22 @@ public class DoajArticleContentTask {
     @Async
     public void task(){
 
+        Spider spider = Spider.create(processor).addPipeline(pipeline).setScheduler(redisScheduler);
 
-        String articleUrl = DoajUtil.getArticleUrl("0");
+//        int total = 3248762;
+//        int start = 2499150;
+//
+//        for (int i = start; i < total;i+=20) {
+//            log.info("i={}",i);
+//
+//            String articleUrl = DoajUtil.getArticleUrl(String.valueOf(i));
+//            log.info("url={}",articleUrl);
+//            spider.addUrl(articleUrl);
+//        }
+
+        String articleUrl = DoajUtil.getArticleUrl("2499050");
 
         log.info("初始url={}",articleUrl);
-
-        Spider spider = Spider.create(processor).addPipeline(pipeline).setScheduler(redisScheduler);
 
         spider.addUrl(articleUrl);
 

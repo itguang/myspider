@@ -3,7 +3,6 @@ package com.libstar.kb.spider.sp.blyun;
 import com.libstar.kb.spider.sp.blyun.entity.JournalTempEntity;
 import com.libstar.kb.spider.sp.blyun.journal.JournalTask;
 import com.libstar.kb.spider.sp.blyun.service.JournalTempService;
-import com.libstar.kb.spider.sp.cspd.yeartree.YearTreeTask;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

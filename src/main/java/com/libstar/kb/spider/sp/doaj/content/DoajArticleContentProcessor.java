@@ -38,24 +38,28 @@ public class DoajArticleContentProcessor implements PageProcessor {
     public void process(Page page) {
 
         JsonParser parser = new JsonParser();
-        JsonObject jsonObject = parser.parse(page.getRawText()).getAsJsonObject();
+        String rawText = page.getRawText();
+        int index1 = rawText.indexOf("(");
+        int index2 = rawText.lastIndexOf(")");
+        String substring = rawText.substring(index1+1, index2);
+        JsonObject jsonObject = parser.parse(substring).getAsJsonObject();
         JsonObject hits1 = jsonObject.get("hits").getAsJsonObject();
 
-        if(flag) {
-
-                //总数
-                int total = hits1.get("total").getAsInt();
-                int num = total % pageSize==0?total/pageSize:total/pageSize+1;
-                log.info("正在添加 {} 条请求...",num);
-                for (int i = 1; i < num; i++) {
-                    String size = String.valueOf(i * pageSize);
-                    String articleUrl = DoajUtil.getArticleUrl(size);
-                    page.addTargetRequest(articleUrl);
-                }
-                flag = false;
-                log.info("添加 {} 条请求完毕!",num);
-
-        }
+//        if(flag) {
+//
+//                //总数
+//                int total = hits1.get("total").getAsInt();
+//                int num = total % pageSize==0?total/pageSize:total/pageSize+1;
+//                log.info("正在添加 {} 条请求...",num);
+//                for (int i = 1; i < num; i++) {
+//                    String size = String.valueOf(i * pageSize);
+//                    String articleUrl = DoajUtil.getArticleUrl(size);
+//                    page.addTargetRequest(articleUrl);
+//                }
+//                flag = false;
+//                log.info("添加 {} 条请求完毕!",num);
+//
+//        }
 
         JsonArray hits = hits1.get("hits").getAsJsonArray();
         Gson gson = new Gson();

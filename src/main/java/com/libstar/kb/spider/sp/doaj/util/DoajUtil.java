@@ -17,10 +17,13 @@ public class DoajUtil {
      *https://doaj.org/query/journal,article/_search?source={%22query%22:{%22match_all%22:{}},%22from%22:20,%22size%22:10}
      * https://doaj.org/query/journal,article/_search?source={"query":{"match_all":{}},"from":20,"size":10}
      * }
-     */
-    public static String baseUrl = "https://doaj.org/query/journal,article/_search?source=";
+     *///jQuery19104550269291196112_1533693037955
+      // jQuery19104550269291196112_1533693037955
+    //https://doaj.org/query/journal,article/_search?ref=doaj&callback=jQuery19104550269291196112_1533693037955&source={ "query": { "match_all": {} }, "from": 0, "size": 10 }
+    public static String baseUrl = "https://doaj.org/query/journal,article/_search?ref=doaj&callback=jQuery19104550269291196112_1533693037955&source=";
 
-    public static String params = "{\"query\":{\"match_all\":{}},\"from\":#,\"size\":10}";
+    public static String params = "{\"query\":{\"match_all\":{}},\"from\":#,\"size\":20}";
+//    public static String params = "{ \"query\": { \"match_all\": {} },\"from\": #, \"size\": 10 }";
 
     /**
      *
