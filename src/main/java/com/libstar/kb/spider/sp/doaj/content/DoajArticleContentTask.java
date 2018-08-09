@@ -7,6 +7,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import sun.text.resources.en.FormatData_en_IE;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.downloader.HttpClientDownloader;
+import us.codecraft.webmagic.proxy.Proxy;
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
 /**
@@ -31,6 +34,9 @@ public class DoajArticleContentTask {
     public void task(){
 
         Spider spider = Spider.create(processor).addPipeline(pipeline).setScheduler(redisScheduler);
+        HttpClientDownloader downloader = new HttpClientDownloader();
+        downloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("127.0.0.1", 8888)));
+        spider.setDownloader(downloader);
 
 //        int total = 3248762;
 //        int start = 2499150;
