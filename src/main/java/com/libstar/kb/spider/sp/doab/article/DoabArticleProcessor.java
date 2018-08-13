@@ -4,7 +4,6 @@ import com.libstar.kb.spider.sp.cspd.utils.UrlUtils;
 import com.libstar.kb.spider.sp.doab.entity.BookEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -14,7 +13,6 @@ import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 李增光
@@ -27,7 +25,6 @@ public class DoabArticleProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        Map<String, String> params = UrlUtils.getParams(page.getUrl().get());
         Integer currentPage = Integer.parseInt(UrlUtils.getParams(page.getUrl().get()).get("page"));
         String queryField = UrlUtils.getParams(page.getUrl().get()).get("queryfield").toUpperCase();
         Html html = page.getHtml();
@@ -63,35 +60,25 @@ public class DoabArticleProcessor implements PageProcessor {
             String language = replace.regex("<strong>Language</strong>:(.*?)<br>").get();
             String doi = replace.regex("<strong>DOI</strong>:(.*?)<strong>Language</strong>").get();
             String dateOfAddDoab = replace.regex("<strong>Added to DOAB on </strong>:(.*?)<br>").get();
-//
-//            log.info("author={}", author);
-//            log.info("name={}", name);
-//            log.info("img={}", img);
-//            log.info("isbn={}", isbn);
-//            log.info("year={}", year);
-//            log.info("pages={}", pages);
-//            log.info("publisher={}", publisher);
-//            log.info("subject={}", subject);
-//            log.info("description={}", description);
-//            log.info("Keywords={}", StringUtils.strip(Keywords.toString(), "[]"));
-//            log.info("doi={}", doi);
-//            log.info("language={}", language);
-//            log.info("dateOfAddDoab={}", dateOfAddDoab);
+
+            String bookTitle = replace.regex("<strong>Book title:</strong>(.*?)</i>").get();
 
             BookEntity bookEntity = new BookEntity();
             bookEntity.setAuthor(author);
-            bookEntity.setDateOfAddDoab(null==dateOfAddDoab?"":dateOfAddDoab.trim());
+            bookEntity.setDateOfAddDoab(null == dateOfAddDoab ? "" : dateOfAddDoab.trim());
             bookEntity.setDescription(description);
-            bookEntity.setDoi(null==doi?"":doi.trim());
+            bookEntity.setDoi(null == doi ? "" : doi.trim());
             bookEntity.setImg(img);
             bookEntity.setIsbn(isbn);
             bookEntity.setKeywords(StringUtils.strip(Keywords.toString(), "[]"));
-            bookEntity.setLanguage(null==language?"":language.trim());
+            bookEntity.setLanguage(null == language ? "" : language.trim());
             bookEntity.setName(name);
             bookEntity.setPages(pages);
             bookEntity.setPublisher(publisher);
             bookEntity.setSubject(subject);
             bookEntity.setYear(year);
+            bookEntity.setBookTitle(bookTitle);
+            bookEntity.setRequestUrl(page.getUrl().get());
 
             list.add(bookEntity);
         }

@@ -21,6 +21,7 @@ public class BookEntity {
    private  Integer id;
    private String author;
    private String name;
+   private String bookTitle;
    private String img;
    private String isbn;
    private String year;
@@ -32,6 +33,8 @@ public class BookEntity {
    private String doi;
    private String language;
    private String dateOfAddDoab;
+
+   private String requestUrl;
 
 
 }

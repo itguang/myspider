@@ -37,7 +37,7 @@ public class DoabTest {
             "  <!-- END imageDiv --> \n" +
             "  <div class=\"data\"> \n" +
             "   <b><span itemprop=\"name\">À beira da linha: formações urbanas da Noroeste Paulista </span></b> \n" +
-            "   <p> </p>\n" +
+            "   <p><i><strong>Book title:</strong> Mediterranean quarantines, 1750–1914: Space, identity and power</i> </p>\n" +
             "   <div style=\"color: #585858\"> \n" +
             "    <!-- author (s) --> \n" +
             "    <strong>Authors</strong>: \n" +
@@ -718,6 +718,10 @@ public class DoabTest {
             String language = replace.regex("<strong>Language</strong>:(.*?)<br>").get();
             String doi = replace.regex("<strong>DOI</strong>:(.*?)<strong>Language</strong>").get();
             String dateOfAddDoab = replace.regex("<strong>Added to DOAB on </strong>:(.*?)<br>").get();
+            String bookTitle = replace.regex("<strong>Book title:</strong>(.*?)</i>").get();
+
+
+
 
             log.info("author={}", author);
             log.info("name={}", name);
