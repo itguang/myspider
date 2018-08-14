@@ -47,7 +47,7 @@ public class DoabArticleProcessor implements PageProcessor {
             String img = "http://schema.org/Book" + node.xpath("//div[@class='imageDiv']/img/@src").get();
             String name = node.xpath("//div[@class='data']/b/span[@itemprop='name']/text()").get();
             String author = node.xpath("//div[@class='data']/div[@style='color: #585858']/a[@itemprop='author']/text()").get();
-            String isbn = node.xpath("//div[@class='data']/div[@style='color: #585858']/span[@itemprop='isbn']/text()").get().replaceAll(" ", ",");
+            String isbn = node.xpath("//div[@class='data']/div[@style='color: #585858']/span[@itemprop='isbn']/text()").get();
             String year = node.xpath("//div[@class='data']/div[@style='color: #585858']/span[@itemprop='datePublished']/text()").get();
             String pages = node.xpath("//div[@class='data']/div[@style='color: #585858']/span[@itemprop='numberOfPages']/text()").get();
             String publisher = node.xpath("//div[@class='data']/div[@style='color: #585858']/a[@itemprop='publisher']/text()").get();
@@ -65,13 +65,13 @@ public class DoabArticleProcessor implements PageProcessor {
 
             BookEntity bookEntity = new BookEntity();
             bookEntity.setAuthor(author);
-            bookEntity.setDateOfAddDoab(null == dateOfAddDoab ? "" : dateOfAddDoab.trim());
+            bookEntity.setDateOfAddDoab(StringUtils.trim(dateOfAddDoab));
             bookEntity.setDescription(description);
-            bookEntity.setDoi(null == doi ? "" : doi.trim());
+            bookEntity.setDoi(StringUtils.trim(doi));
             bookEntity.setImg(img);
-            bookEntity.setIsbn(isbn);
+            bookEntity.setIsbn(null == isbn ? "" :isbn.trim().replaceAll(" ",","));
             bookEntity.setKeywords(StringUtils.strip(Keywords.toString(), "[]"));
-            bookEntity.setLanguage(null == language ? "" : language.trim());
+            bookEntity.setLanguage(StringUtils.trim(language));
             bookEntity.setName(name);
             bookEntity.setPages(pages);
             bookEntity.setPublisher(publisher);
@@ -79,6 +79,7 @@ public class DoabArticleProcessor implements PageProcessor {
             bookEntity.setYear(year);
             bookEntity.setBookTitle(bookTitle);
             bookEntity.setRequestUrl(page.getUrl().get());
+
 
             list.add(bookEntity);
         }

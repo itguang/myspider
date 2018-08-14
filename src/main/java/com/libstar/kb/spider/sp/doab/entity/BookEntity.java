@@ -24,6 +24,8 @@ public class BookEntity {
    private String bookTitle;
    private String img;
    private String isbn;
+   private String isbn10;
+   private String isbn13;
    private String year;
    private String pages;
    private String publisher;

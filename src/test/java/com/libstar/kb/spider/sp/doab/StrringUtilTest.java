@@ -3,6 +3,9 @@ package com.libstar.kb.spider.sp.doab;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author 李增光
  * @create 2018-08-09 19:55
@@ -115,12 +118,30 @@ public class StrringUtilTest {
     @Test
     public static void test1(){
 
+        String regex = "([1-9]\\d*)";
 
-        boolean equals = StringUtils.equals(str1, null);
-        int i = StringUtils.indexOf(text, "做真实的自己");
-        boolean contains = StringUtils.contains(text, "社会");
+        String str = "x, 487";
+        String str2 = "307 Seiten";
 
-        System.out.println(contains);
+        Pattern p = Pattern.compile(regex);        //得到字符串中的数字
+        Matcher m = p.matcher(str);
+        Matcher m2 = p.matcher(str2);
+        boolean b = m.find();
+        if(b){
+            String group = m.group();
+            int i = Integer.parseInt(group);
+            System.out.println(i);
+        }
+
+        boolean b1 = m2.find();
+        if(b1){
+            String group = m2.group();
+            int i = Integer.parseInt(group);
+            System.out.println(i);
+        }
+
+
+
     }
 
 
